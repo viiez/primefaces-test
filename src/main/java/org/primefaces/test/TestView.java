@@ -27,6 +27,11 @@ import org.primefaces.model.charts.optionconfig.title.Title;
 public class TestView implements Serializable {
     
     private BarChartModel barModel;
+
+    private String label = "TEST SCALE LABEL";
+    
+    private Integer suggestedMin;
+    private Integer suggestedMax;
     
     @PostConstruct  
     public void init() {
@@ -35,6 +40,8 @@ public class TestView implements Serializable {
 
     public void createBarModel() {
         barModel = new BarChartModel();
+        barModel.setExtender("window.extender");
+
         ChartData data = new ChartData();
 
         BarChartDataSet barDataSet = new BarChartDataSet();
@@ -91,11 +98,16 @@ public class TestView implements Serializable {
         linearAxes.setOffset(true);
         CartesianLinearTicks ticks = new CartesianLinearTicks();
         ticks.setBeginAtZero(true);
+        // -------this doesn't work-------
+        ticks.setSuggestedMax(suggestedMax);
+        ticks.setSuggestedMin(suggestedMin);
+        // -------------------------------
         linearAxes.setTicks(ticks);
 
         // -------this doesn't work-------
         CartesianScaleLabel scaleLabel = new CartesianScaleLabel();
-        scaleLabel.setLabelString("TEST SCALE LABEL");
+        scaleLabel.setDisplay(true);
+        scaleLabel.setLabelString(label);
         linearAxes.setScaleLabel(scaleLabel);
         // -------------------------------
         cScales.addYAxesData(linearAxes);
@@ -122,6 +134,34 @@ public class TestView implements Serializable {
         options.setAnimation(animation);
 
         barModel.setOptions(options);
+    }
+
+    public BarChartModel getBarModel() {
+        return barModel;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public Integer getSuggestedMin() {
+        return suggestedMin;
+    }
+
+    public void setSuggestedMin(Integer suggestedMin) {
+        this.suggestedMin = suggestedMin;
+    }
+
+    public Integer getSuggestedMax() {
+        return suggestedMax;
+    }
+
+    public void setSuggestedMax(Integer suggestedMax) {
+        this.suggestedMax = suggestedMax;
     }
 
 }

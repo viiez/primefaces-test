@@ -11,9 +11,22 @@
     </h:head>
     <h:body>
 
-        <h1>Scale-Label Test</h1>
+        <h1>Configuration Test</h1>
         <h:form id="frmTest">
-            <p:barChart model="#{testView.barModel}" style="width: 100%; height: 500px;" />
+            <p:barChart id="chart" widgetVar="chart" model="#{testView.barModel}" style="width: 100%; height: 500px;" />
+
+            <div style="display: flex; justify-content: center;">
+                <p:outputLabel for="@next" value="scale-label" />
+                <p:inputText id="label" value="#{testView.label}" />
+
+                <p:outputLabel for="@next" value="suggested min" />
+                <p:inputNumber id="min" value="#{testView.suggestedMin}" />
+
+                <p:outputLabel for="@next" value="suggested max" />
+                <p:inputNumber id="max" value="#{testView.suggestedMax}" />
+
+                <p:commandButton id="refresh" value="refresh" action="#{testView.init}" process="@this label min max" update="@form" />
+            </div>
         </h:form>
 
     </h:body>
