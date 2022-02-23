@@ -30,8 +30,8 @@ public class TestView implements Serializable {
 
     private String label = "TEST SCALE LABEL";
     
-    private Integer suggestedMin;
-    private Integer suggestedMax;
+    private Integer suggestedMin = -50;
+    private Integer suggestedMax = 100;
     
     @PostConstruct  
     public void init() {
